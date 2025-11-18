@@ -466,22 +466,13 @@
     </div>
     
     <script>
-        // Next page navigation
-        document.querySelector('.next-page-btn').addEventListener('click', function() {
-            document.body.classList.add('fade-out');
-            setTimeout(function() {
-                window.location.href = "cake.html"; // Change to your next page
-            }, 700);
-        });
-        
         // Photos and captions data
         const memories = [
-            { photo: 'pic1.jpg', caption: '.Mere haath mein tera haath ho .. Saari jannatein mere pass ho❤️' },
+            { photo: 'pic1.jpg', caption: 'Mere haath mein tera haath ho .. Saari jannatein mere pass ho❤️' },
             { photo: 'pic2.jpg', caption: 'Every time I look into your eyes, I see my forever' },
-            { photo: 'pic3.jpg', caption: 'You make me laugh like I’m a child again — thank you for that.' },
-            { photo: 'pic4.jpg', caption: "Let’s freeze this moment — your laughter, my arms, our world. ❤️"},
-               { photo: 'pic5.jpg', caption: "A special and warm hug on your special day 💖"},
-                    
+            { photo: 'pic3.jpg', caption: 'You make me laugh like I am a child again — thank you for that.' },
+            { photo: 'pic4.jpg', caption: "Let's freeze this moment — your laughter, my arms, our world. ❤️"},
+            { photo: 'pic5.jpg', caption: "A special and warm hug on your special day 💖"},
         ];
         
         let currentPhotoIndex = 0;
@@ -491,7 +482,6 @@
         const initialMirror = document.getElementById('initialMirror');
         const carouselContainer = document.getElementById('carouselContainer');
         const carouselTrack = document.getElementById('carouselTrack');
-        const typewriterText = document.getElementById('typewriterText');
         const downloadBtn = document.getElementById('downloadBtn');
         const bgMusic = document.getElementById('bgMusic');
         const musicBtn = document.getElementById('musicBtn');
@@ -499,57 +489,51 @@
         const arrowLeft = document.getElementById('arrowLeft');
         const arrowRight = document.getElementById('arrowRight');
         
+        // Auto-play music when page loads
         window.addEventListener('load', () => {
-        bgMusic.play().catch(e => {
-            console.log('Audio autoplay blocked - user interaction required');
-            // Music will play when user clicks anywhere on the page
-            document.body.addEventListener('click', function playOnFirstClick() {
-                bgMusic.play();
-                document.body.removeEventListener('click', playOnFirstClick);
-            }, { once: true });
+            bgMusic.play().catch(e => {
+                console.log('Audio autoplay blocked - user interaction required');
+                // Music will play when user clicks anywhere on the page
+                document.body.addEventListener('click', function playOnFirstClick() {
+                    bgMusic.play();
+                    document.body.removeEventListener('click', playOnFirstClick);
+                }, { once: true });
+            });
         });
-    });
-
-    // Next page navigation
-    document.querySelector('.next-page-btn').addEventListener('click', function() {
-        document.body.classList.add('fade-out');
-        setTimeout(function() {
-            window.location.href = "cake.html";
-        }, 700);
-    });
-
-
+    
+        // Next page navigation
+        document.querySelector('.next-page-btn').addEventListener('click', function() {
+            document.body.classList.add('fade-out');
+            setTimeout(function() {
+                window.location.href = "cake.html";
+            }, 700);
+        });
+    
         // Unlock memories and show carousel
         function unlockMemories() {
             if (!memoriesUnlocked) {
                 memoriesUnlocked = true;
-
+    
                 // Hide initial mirror
                 initialMirror.style.opacity = '0';
                 initialMirror.style.transform = 'scale(0.8)';
-
+    
                 setTimeout(() => {
                     initialMirror.classList.add('hidden');
-
+    
                     // Show carousel
                     carouselContainer.classList.remove('hidden');
                     carouselContainer.classList.add('slide-in');
-
+    
                     // Show arrow buttons
                     arrowLeft.style.display = 'flex';
                     arrowRight.style.display = 'flex';
-
+    
                     // Create carousel items
                     createCarousel();
-
+    
                     // Show download button
                     downloadBtn.classList.remove('hidden');
-
-                    // Start background music
-                  //  bgMusic.play().catch(e => console.log('Audio autoplay blocked'));
-
-                    // Show initial caption
-                    showTypewriter(memories[currentPhotoIndex].caption);
                 }, 500);
             }
         }
@@ -604,9 +588,6 @@
                 
                 // Update carousel position
                 updateCarouselPosition();
-                
-                // Show typewriter effect
-                showTypewriter(memories[currentPhotoIndex].caption);
             }
         }
         
@@ -614,22 +595,11 @@
         function updateCarouselPosition() {
             const track = carouselTrack;
             const isMobile = window.innerWidth < 768;
-            const itemWidth = isMobile ? 265 : 320; // 250px/300px + 15px/20px gap
+            const itemWidth = isMobile ? 265 : 320;
             const containerWidth = carouselContainer.offsetWidth;
             const offset = (containerWidth / 2) - (itemWidth / 2) - (currentPhotoIndex * itemWidth);
             
             track.style.transform = `translateX(${offset}px)`;
-        }
-        
-        // Typewriter effect
-        function showTypewriter(text) {
-            typewriterText.textContent = '';
-            typewriterText.classList.remove('typewriter');
-            
-            setTimeout(() => {
-                typewriterText.textContent = text;
-                typewriterText.classList.add('typewriter');
-            }, 100);
         }
         
         // Download current photo
@@ -683,10 +653,8 @@
             
             if (Math.abs(deltaX) > swipeThreshold && memoriesUnlocked) {
                 if (deltaX > 0 && currentPhotoIndex < memories.length - 1) {
-                    // Swipe left - next photo
                     selectPhoto(currentPhotoIndex + 1);
                 } else if (deltaX < 0 && currentPhotoIndex > 0) {
-                    // Swipe right - previous photo
                     selectPhoto(currentPhotoIndex - 1);
                 }
             }
@@ -726,5 +694,6 @@
             lastTouchEnd = now;
         }, false);
     </script>
+
 </body>
 </html>
