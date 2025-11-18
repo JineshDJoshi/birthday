@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday My Love! 💕</title>
-     <script src="Mere.mp3"></script>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap');
         
@@ -189,63 +188,6 @@
             50% { box-shadow: 0 10px 30px rgba(233, 30, 99, 0.6), 0 0 50px rgba(233, 30, 99, 0.3); }
         }
 
-        .audio-controls {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
-            backdrop-filter: blur(10px);
-            padding: 15px 20px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            z-index: 100;
-            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            transition: all 0.3s ease;
-        }
-
-        .audio-controls:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(233, 30, 99, 0.2);
-        }
-
-        .audio-controls button {
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: #e91e63;
-            margin-right: 15px;
-            transition: all 0.3s ease;
-            padding: 5px;
-            border-radius: 50%;
-        }
-
-        .audio-controls button:hover {
-            transform: scale(1.3);
-            background: rgba(233, 30, 99, 0.1);
-        }
-
-        .audio-controls input {
-            width: 120px;
-            height: 5px;
-            background: rgba(233, 30, 99, 0.2);
-            border-radius: 5px;
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        .audio-controls input::-webkit-slider-thumb {
-            appearance: none;
-            width: 15px;
-            height: 15px;
-            background: #e91e63;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
-        }
-
         .floating-hearts {
             position: absolute;
             top: 0;
@@ -331,6 +273,48 @@
             }
         }
 
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(233, 30, 99, 0.3);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(233, 30, 99, 0.6), 0 0 40px rgba(244, 143, 177, 0.4);
+            }
+        }
+
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.2);
+        }
+
+        .music-control:hover {
+            transform: scale(1.15);
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.3);
+        }
+
+        .music-control span {
+            font-size: 28px;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             h1 {
@@ -350,120 +334,82 @@
                 padding: 1rem 2.5rem;
                 font-size: 1.3rem;
             }
-            .audio-controls {
-                bottom: 20px;
-                right: 20px;
-                padding: 10px 15px;
+            .music-control {
+                width: 50px;
+                height: 50px;
+            }
+            .music-control span {
+                font-size: 24px;
             }
         }
-
-        /* Special effects */
-        .glow {
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 20px rgba(233, 30, 99, 0.3);
-            }
-            to {
-                text-shadow: 0 0 30px rgba(233, 30, 99, 0.6), 0 0 40px rgba(244, 143, 177, 0.4);
-            }
-        }
-
-        .music-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .music-control:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .music-control i {
-            color: #ff3d7f;
-            font-size: 24px;
-        }
-
     </style>
 </head>
 <body>
+    <!-- Audio Element (ADD THIS) -->
+    <audio id="bgMusic" loop>
+        <source src="Mere.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="stars"></div>
     <div class="floating-hearts"></div>
     
     <div class="container">
-       <!-- ...existing code... -->
-<h1 class="glow">Happy Birthday kanishtha💕✨</h1>
+        <h1 class="glow">Happy Birthday Kanishtha💕✨</h1>
         <div class="subtitle">
             To the most amazing girl in the world
         </div>
         <div class="love-message">
-            "You make my every day special — but today’s all yours. Happy birthday, my love 🌹"
-
+            "You make my every day special — but today's all yours. Happy birthday, my love 🌹"
         </div>
         <button class="next-button" onclick="goToNextPage()">
             Begin Your Surprise! 💖
         </button>
     </div>
 
-     <div class="music-control" onclick="backgroundMusic.toggle()">
-        <i class="fas fa-music">🎵</i>
+    <div class="music-control" id="musicControl">
+        <span id="musicIcon">🎵</span>
     </div>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script>
-
-         document.querySelector('.enter-button').addEventListener('click', function() {
-            backgroundMusic.play();
-        });
-
-        // Audio controls
-        const audio = document.getElementById('birthday-song');
-        const playPauseBtn = document.getElementById('play-pause');
-        const volumeControl = document.getElementById('volume');
+        // Get audio element and controls
+        const bgMusic = document.getElementById('bgMusic');
+        const musicControl = document.getElementById('musicControl');
+        const musicIcon = document.getElementById('musicIcon');
         let isPlaying = false;
 
-        audio.volume = volumeControl.value;
-
-        // Auto-play with user interaction
-        document.addEventListener('click', function() {
-            if (!isPlaying) {
-                audio.play().then(() => {
-                    isPlaying = true;
-                    playPauseBtn.textContent = '⏸️';
-                }).catch(e => console.log('Audio play failed:', e));
-            }
-        }, { once: true });
-
-        playPauseBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (isPlaying) {
-                audio.pause();
-                playPauseBtn.textContent = '🎵';
-            } else {
-                audio.play();
-                playPauseBtn.textContent = '⏸️';
-            }
-            isPlaying = !isPlaying;
+        // Auto-play music when page loads
+        window.addEventListener('load', () => {
+            bgMusic.volume = 0.5; // Set volume to 50%
+            
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                musicIcon.textContent = '🎵';
+            }).catch(e => {
+                console.log('Audio autoplay blocked - waiting for user interaction');
+                // Music will play on first click
+                document.body.addEventListener('click', function playOnFirstClick() {
+                    bgMusic.play().then(() => {
+                        isPlaying = true;
+                        musicIcon.textContent = '🎵';
+                    });
+                    document.body.removeEventListener('click', playOnFirstClick);
+                }, { once: true });
+            });
         });
 
-        volumeControl.addEventListener('input', () => {
-            audio.volume = volumeControl.value;
+        // Music control button
+        musicControl.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.textContent = '🔇';
+                isPlaying = false;
+            } else {
+                bgMusic.play();
+                musicIcon.textContent = '🎵';
+                isPlaying = true;
+            }
         });
 
         // Next page function
@@ -474,9 +420,7 @@
                 duration: 0.8,
                 ease: "back.out(1.7)",
                 onComplete: () => {
-                    // Replace with your next page URL
-                    
-                     window.location.href = "memory.html";
+                    window.location.href = "memory.html";
                 }
             });
         }
@@ -574,43 +518,5 @@
             });
         }, 5000);
     </script>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
 </body>
 </html>
