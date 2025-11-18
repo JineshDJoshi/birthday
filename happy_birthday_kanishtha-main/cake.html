@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let's Celebrate with Cake!</title>
 
-     <script src="audio.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
         * {
@@ -177,6 +175,7 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
         .next-page-button {
             position: fixed;
             bottom: 40px;
@@ -232,11 +231,91 @@
             transform: translateY(0);
             animation: pulse 2s infinite;
         }
-    
+
+        /* Music Control Button */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 113, 182, 0.2);
+        }
+
+        .music-control:hover {
+            transform: scale(1.15);
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 20px rgba(255, 113, 182, 0.3);
+        }
+
+        .music-control span {
+            font-size: 28px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .heading {
+                font-size: 2.5rem;
+                padding: 0 20px;
+            }
+
+            .cake-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .cake {
+                width: 200px;
+                height: 200px;
+            }
+
+            .layer-1 {
+                width: 200px;
+            }
+
+            .layer-2 {
+                width: 170px;
+            }
+
+            .layer-3 {
+                width: 140px;
+            }
+
+            .next-page-button {
+                bottom: 20px;
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+
+            .music-control {
+                width: 50px;
+                height: 50px;
+            }
+
+            .music-control span {
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop>
+        <source src="Mere.mp3" type="audio/mpeg">
+    </audio>
+
     <h1 class="heading">Let's Cut the Cake! 🎂</h1>
+    
     <div class="cake-container">
         <div class="cake">
             <div class="layer layer-1">
@@ -259,13 +338,59 @@
             </div>
         </div>
     </div>
+
+    <!-- Music Control Button -->
+    <div class="music-control" id="musicControl">
+        <span id="musicIcon">🎵</span>
+    </div>
+
     <button class="next-page-button">Next Page</button>
 
     <script>
+        // Get elements
         const cake = document.querySelector('.cake-container');
         const candle = document.querySelector('.candle');
         const flame = document.querySelector('.flame');
+        const bgMusic = document.getElementById('bgMusic');
+        const musicControl = document.getElementById('musicControl');
+        const musicIcon = document.getElementById('musicIcon');
+        
         let isClicked = false;
+        let isPlaying = false;
+
+        // Auto-play music when page loads
+        window.addEventListener('load', () => {
+            bgMusic.volume = 0.5; // Set volume to 50%
+            
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                musicIcon.textContent = '🎵';
+            }).catch(e => {
+                console.log('Audio autoplay blocked - waiting for user interaction');
+                // Music will play on first click
+                document.body.addEventListener('click', function playOnFirstClick() {
+                    bgMusic.play().then(() => {
+                        isPlaying = true;
+                        musicIcon.textContent = '🎵';
+                    });
+                    document.body.removeEventListener('click', playOnFirstClick);
+                }, { once: true });
+            });
+        });
+
+        // Music control button
+        musicControl.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.textContent = '🔇';
+                isPlaying = false;
+            } else {
+                bgMusic.play();
+                musicIcon.textContent = '🎵';
+                isPlaying = true;
+            }
+        });
 
         const ribbonColors = [
             'linear-gradient(45deg, #FF9ECD, #FF71B6)',
@@ -324,7 +449,6 @@
 
         // Add button click handler
         document.querySelector('.next-page-button').addEventListener('click', () => {
-            // You can replace this with your actual next page URL
             window.location.href = 'celebrate.html';
         });
 
