@@ -499,6 +499,26 @@
         const arrowLeft = document.getElementById('arrowLeft');
         const arrowRight = document.getElementById('arrowRight');
         
+        window.addEventListener('load', () => {
+        bgMusic.play().catch(e => {
+            console.log('Audio autoplay blocked - user interaction required');
+            // Music will play when user clicks anywhere on the page
+            document.body.addEventListener('click', function playOnFirstClick() {
+                bgMusic.play();
+                document.body.removeEventListener('click', playOnFirstClick);
+            }, { once: true });
+        });
+    });
+
+    // Next page navigation
+    document.querySelector('.next-page-btn').addEventListener('click', function() {
+        document.body.classList.add('fade-out');
+        setTimeout(function() {
+            window.location.href = "cake.html";
+        }, 700);
+    });
+
+
         // Unlock memories and show carousel
         function unlockMemories() {
             if (!memoriesUnlocked) {
@@ -526,7 +546,7 @@
                     downloadBtn.classList.remove('hidden');
 
                     // Start background music
-                    bgMusic.play().catch(e => console.log('Audio autoplay blocked'));
+                  //  bgMusic.play().catch(e => console.log('Audio autoplay blocked'));
 
                     // Show initial caption
                     showTypewriter(memories[currentPhotoIndex].caption);
